@@ -28,8 +28,7 @@ class AdminController extends Controller {
     public function products()
      {
        
-       dump(Auth::user());
-       die;
+       
        
         $products = Product::all();
 

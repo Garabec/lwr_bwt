@@ -105,7 +105,7 @@
       format: 'YYYY-MM-DD'
     },
     startDate: '2018-02-13',
-    endDate: '2018-02-23'
+    endDate: '2018-04-23'
 }, 
 function(start, end, label) {
     alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));

@@ -1,3 +1,13 @@
+
+$(document).ready(function() {
+    $('#select').select2({
+        tags: true
+        
+    });
+});
+
+
+
 $(document).on('click', '#new_tag', function(e) {
     
     e.preventDefault();
@@ -40,8 +50,14 @@ $(document).on('click', '#del', function(e) {
     e.preventDefault();
     
    var id= parseInt($(this).data('id'));
+   
+   if ( confirm("Вы действительно хотите удалить?") ){
+        $("#tag-"+id).remove();  return true;
+    } else {
+        return false;
+    }
     
-  $("#tag-"+id).remove();
+  
     
 })
 
@@ -80,7 +96,7 @@ $(document).on('click', '#button_user_edit', function(e) {
      
      
  
-     
+ 
      
      
      
@@ -136,9 +152,15 @@ $(document).on('click', '#button_user_edit', function(e) {
         //  });
          
    function confirmDelete(){
+       
+       
     if ( confirm("Вы действительно хотите удалить?") ){
         return true;
     } else {
         return false;
     }
+    
+    
+    
+    
 }

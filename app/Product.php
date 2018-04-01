@@ -77,7 +77,7 @@ class Product extends Model
 $charts = [
 
     'chart' => ['type' => 'column'],
-    'title' => ['text' => 'fruit Consumption'],
+    'title' => ['text' => 'Grafic'],
     'xAxis' => [
         'categories' => $dates,
     ],

@@ -40,10 +40,10 @@
                   @endif
                   </div>
                 </div>
-                 <div class="form-group" >
-                 <label for="tag" class="col-sm-2 control-label" >Tag</label>    
-                  <div class="  col-sm-4 " ></div>
-                </div>
+                <!-- <div class="form-group" >-->
+                <!-- <label for="tag" class="col-sm-2 control-label" >Tag</label>    -->
+                <!--  <div class="  col-sm-4 " ></div>-->
+                <!--</div>-->
                 
                 <div class="form-group" id="tag" style="display:none">
                   <label for="tag" class="col-sm-2 control-label" ></label>
@@ -70,17 +70,26 @@
                 
             
              
-              <div class="form-group" id="button_tag">
-                 <label for="tag" class="col-sm-2 control-label" ></label>    
-                  <div class=" offset-sm-2 col-sm-4 " >
-                      <button type="button" id="new_tag" class="btn btn-info pull-left">New tag</button>
-                  </div>
-                   @if ($errors->has('tag.0.name'))
-                    <div style="color:red">{{ $errors->first('tag.0.name') }}</div>
-                   @endif
-              </div>
+              <!--<div class="form-group" id="button_tag">-->
+              <!--   <label for="tag" class="col-sm-2 control-label" ></label>    -->
+              <!--    <div class=" offset-sm-2 col-sm-4 " >-->
+              <!--        <button type="button" id="new_tag" class="btn btn-info pull-left">New tag</button>-->
+              <!--    </div>-->
+              <!--     @if ($errors->has('tag.0.name'))-->
+              <!--      <div style="color:red">{{ $errors->first('tag.0.name') }}</div>-->
+              <!--     @endif-->
+              <!--</div>-->
            
-               
+                <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label">New Tag</label>
+                  <div class="col-sm-10">
+                   <select  id="select" name="tag[]" multiple="multiple" style="width:307px">
+                 @foreach($product->getAllTags() as $tag)     
+                    <option value="{{$tag->name}}" >{{$tag->name}}</option>
+                 @endforeach   
+                  </select>
+                  </div>
+                </div>
                 
                 
               <!-- /.box-body -->

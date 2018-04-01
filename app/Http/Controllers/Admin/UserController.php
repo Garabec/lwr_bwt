@@ -7,6 +7,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserAddRequest;
+use App\Http\Requests\UserEditRequest;
 
 class UserController extends Controller {
 
@@ -23,76 +25,41 @@ class UserController extends Controller {
          
     }
     
-    public function add(Request $request){
+    public function add(){
         
+      return view('admin.users.add');  
+    }
+    
+    public function add_post(UserAddRequest $request){
         
-          if ($request->isMethod('post')){
-          
-         // dump($request->all());
-          
-          $v = Validator::make($request->all(), [
-                  'name' => 'required|max:255',
-                  'email' => 'required|email|max:255|unique:users',
-                  'password' => 'min:6|confirmed',
-                  'role'=>'required'
-           ]);
-           
-         
-          
-          if ($v->fails())
-                {
-                    return redirect()->back()->withErrors($v->errors()); 
-                }
-                
                 
          $request->merge(array('password' => bcrypt($request->input('password'))));   
          User::create($request->except('_token'));
          
          return redirect()->route('admin.user.index')->with('info','Item created successfully!');
-      }
-        
-      return view('admin.users.add');  
+    
     }
     
-    
-    
-    public function edit($id,Request $request){
+    public function edit($id){
         
-       
-      if ($request->isMethod('post')){
-          
-          $array_validate=[
-                  'name' => 'required|max:255',
-                  'role'=>'required'
-            ];
-            
-          if($request->has('password')){
-              array_push($array_validate,['password' => 'min:6|confirmed']);
-            }
-          
-          $v = Validator::make($request->all(),$array_validate);
-           
-         
-          
-          if ($v->fails())
-            {
-             return redirect()->back()->withErrors($v->errors()); 
-            }
-                
-          if($request->has('password')) {     
+       return view('admin.users.update',['user'=>User::find($id)]);  
+    }
+    
+    public function edit_post($id,UserEditRequest $request){
+        
+         if($request->has('password')) {     
             $request->merge(array('password' => bcrypt($request->input('password'))));     
           }
           
-          $request->except('_token'); 
+          
           $model=User::find($id);
-         
           $model->update($request->except('_token'));
           $model->touch();
           return redirect()->back()->with('info','Item saved successfully!');    
-      }
      
-      return view('admin.users.update',['user'=>User::find($id)]);  
     }
+    
+    
     
     public function delete($id){
         

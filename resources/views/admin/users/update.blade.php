@@ -26,7 +26,7 @@
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <label for="email" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-4">
-                    <input type="email" name="email" class="form-control" value="{{$user->email}}" disabled
+                    <input type="email" name="email" class="form-control" value="{{$user->email}}" readonly
                            placeholder="Enter email...">
                     
                     @if ($errors->has('email'))

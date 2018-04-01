@@ -5,10 +5,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Product;
 use App\Tag;
+use App\Tp;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Events\Dispatcher;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller {
 
@@ -86,30 +88,17 @@ class ProductController extends Controller {
     
     
     
-    public function edit($id,Request $request){
+    public function edit($id){
+        
+       return view('admin.products.update',['product'=>Product::find($id)]);  
+    }
+    
+    
+     public function edit_post($id,ProductRequest $request){
         
        
-      if ($request->isMethod('post')){
+      
           
-         // dump($request->all());
-          
-          $v = Validator::make($request->all(), [
-                  'tag.*' => 'required',
-                  'name' => 'required|max:100|min:4',
-                  'price' => 'required|numeric',
-                  'description' => 'required|max:1000|min:4',
-                  
-           ]);
-           
-         
-          
-          if ($v->fails())
-               {
-                    
-                  
-                    return redirect()->back()->withErrors($v->errors()); 
-                }
-          $request->except('_token'); 
           $model=Product::find($id);
           $model->update($request->except('_token'));
           $model->touch();
@@ -117,30 +106,41 @@ class ProductController extends Controller {
           if ($request->has('tag')) { 
               
       //------------delete old tag----------        
-         foreach($model->tags as $tag_m){     
+         foreach($model->tags as $tag_m){ 
+             
+              Tp::where('product_id', '=', $model->id)->where('tag_id', '=', $tag_m->id)->delete(); 
+             
+         }
          
-               DB::table('tp')->where('product_id', '=', $model->id)->where('tag_id', '=', $tag_m->id)->delete(); }
-          
-        }
-   //-------------crete new tag --------------     
-         if ($request->has('tag')) { 
-          foreach($request->input('tag') as $tag){
+      //-------------crete new tag --------------     
+         foreach($request->input('tag') as $tag){
               
            if(!$model->existsTag($tag)){
             $tag_model=Tag::firstOrCreate(['name'=>$tag]); 
-            DB::table('tp')->insert(['tag_id' => $tag_model->id, 'product_id' => $model->id]);
+            Tp::insert(['tag_id' => $tag_model->id, 'product_id' => $model->id]);
            } 
             
           }
-       }
+         
+          
+        }
+       
+        
+          
+       
         
         return redirect()->back()->with('info','Item saved successfully!');      
-      }
+      
       
      
      
-      return view('admin.products.update',['product'=>Product::find($id)]);  
+      
     }
+    
+    
+    
+    
+    
     
     public function delete($id){
         
@@ -160,6 +160,14 @@ class ProductController extends Controller {
         
      return view('admin.products.grafic',['charts'=>(new Product)->getDataGrafic()]);    
         
+    }
+    
+    
+    public function test(){
+        
+        
+        
+      return view('admin.products.view');   
     }
 
 }

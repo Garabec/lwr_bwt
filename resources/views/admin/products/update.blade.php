@@ -50,16 +50,22 @@
                   <div class="col-sm-4">
                   <input type="text" class="form-control" name="tag[]" placeholder="Enter ..." disabled >
                   </div>
-                  <div class="col-sm-4">
-                  <div class="form-group">
+                <!--  <div class="col-sm-4">-->
+                <!--  <div class="form-group">-->
                   
-                  <select class="form-control" name="list_tag">
-                 @foreach($product->getAllTags() as $tag)     
-                    <option>{{$tag->name}}</option>
-                 @endforeach   
-                  </select>
-                </div>
-                  </div>
+                <!--  <select class="form-control" name="list_tag">-->
+                <!-- @foreach($product->getAllTags() as $tag)     -->
+                <!--    <option>{{$tag->name}}</option>-->
+                <!-- @endforeach   -->
+                <!--  </select>-->
+                <!--</div>-->
+                <!--  </div>-->
+                  
+                  
+                  
+                
+                
+                  
                   <div class="col-sm-1">
                       <button type="button" id="add"  class="btn btn-success pull-rigth">Add</button>
                   </div>
@@ -85,12 +91,23 @@
              
              @endforeach
              
-              <div class="form-group" id="button_tag">
-                 <label for="tag" class="col-sm-2 control-label" ></label>    
-                  <div class=" offset-sm-2 col-sm-4 " >
-                      <button type="button" id="new_tag" data-num="<?=isset($key)?$key:0?>" class="btn btn-info pull-left">New tag</button>
+            <!--  <div class="form-group" id="button_tag">-->
+            <!--     <label for="tag" class="col-sm-2 control-label" ></label>    -->
+            <!--      <div class=" offset-sm-2 col-sm-4 " >-->
+            <!--          <button type="button" id="new_tag" data-num="<?=isset($key)?$key:0?>" class="btn btn-info pull-left">New tag</button>-->
+            <!--      </div>-->
+            <!--</div>-->
+            
+            <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label">New Tag</label>
+                  <div class="col-sm-10">
+                   <select  id="select" name="tag[]" multiple="multiple" style="width:307px">
+                 @foreach($product->getAllTags() as $tag)     
+                    <option value="{{$tag->name}}" >{{$tag->name}}</option>
+                 @endforeach   
+                  </select>
                   </div>
-            </div>
+                </div>
             
                 <div class="form-group">
                   <label for="user" class="col-sm-2 control-label">User</label>
@@ -100,6 +117,10 @@
                   </div>
                 </div>
                 
+                
+               
+                
+                 
                 
               <!-- /.box-body -->
               <div class="box-footer">
