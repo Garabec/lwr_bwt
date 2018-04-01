@@ -50,21 +50,7 @@
                   <div class="col-sm-4">
                   <input type="text" class="form-control" name="tag[]" placeholder="Enter ..." disabled >
                   </div>
-                <!--  <div class="col-sm-4">-->
-                <!--  <div class="form-group">-->
-                  
-                <!--  <select class="form-control" name="list_tag">-->
-                <!-- @foreach($product->getAllTags() as $tag)     -->
-                <!--    <option>{{$tag->name}}</option>-->
-                <!-- @endforeach   -->
-                <!--  </select>-->
-                <!--</div>-->
-                <!--  </div>-->
-                  
-                  
-                  
-                
-                
+            
                   
                   <div class="col-sm-1">
                       <button type="button" id="add"  class="btn btn-success pull-rigth">Add</button>

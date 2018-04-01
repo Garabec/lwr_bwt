@@ -40,10 +40,7 @@
                   @endif
                   </div>
                 </div>
-                <!-- <div class="form-group" >-->
-                <!-- <label for="tag" class="col-sm-2 control-label" >Tag</label>    -->
-                <!--  <div class="  col-sm-4 " ></div>-->
-                <!--</div>-->
+                
                 
                 <div class="form-group" id="tag" style="display:none">
                   <label for="tag" class="col-sm-2 control-label" ></label>
