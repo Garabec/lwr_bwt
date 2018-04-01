@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     {
       $faker = Faker::create();
       for ($i=0;$i<10;$i++) {
-        DB::table('users')->insert([
+        User::insert([
             'name' => $faker->name,
             'email' => $faker->safeEmail,
             'role'=>$faker->randomElement(['admin', 'seller']),

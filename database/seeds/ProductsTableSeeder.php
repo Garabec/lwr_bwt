@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\User;
+use App\Product;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class ProductsTableSeeder extends Seeder
         $faker = Faker::create();
         $users = User::all()->pluck('id')->toArray();
       for ($i=0;$i<100;$i++) {
-        DB::table('products')->insert([
+        Product::insert([
             'name' => strtoupper($faker->word),
             'price' => $faker->numberBetween($min = 1000, $max = 9000),
             'description'=>$faker->text(100),

@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware' => ['auth'
     Route::get('products/edit/{id}',['as'=>'admin.products.edit','uses'=>'ProductController@edit']);
     Route::post('products/edit/{id}',['as'=>'admin.products.edit','uses'=>'ProductController@edit_post']);
     // Route::post('products/edit/{id}',['as'=>'admin.products.edit','uses'=>'ProductController@edit']);
-    Route::post('products/add',['as'=>'admin.products.add','uses'=>'ProductController@add']);
+    Route::post('products/add',['as'=>'admin.products.add','uses'=>'ProductController@add_post']);
     Route::get('products/add',['as'=>'admin.products.add','uses'=>'ProductController@add']);
     Route::get('products/delete/{id}',['as'=>'admin.products.delete','uses'=>'ProductController@delete']);
     Route::get('products/grafic',['as'=>'admin.products.gradic','uses'=>'ProductController@grafic']);

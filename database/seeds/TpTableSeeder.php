@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Product;
 use App\Tag;
+use App\Tp;
 
 class TpTableSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class TpTableSeeder extends Seeder
         
         
       for ($i=0;$i<100;$i++) {
-        DB::table('tp')->insert([
+        Tp::insert([
             'product_id' => (int)$faker->randomElement($products),
             'tag_id' => (int)$faker->randomElement($tags),
             

@@ -16,7 +16,7 @@ class TagsTableSeeder extends Seeder
         
       $faker = Faker::create();
       for ($i=0;$i<10;$i++) {
-        DB::table('tags')->insert([
+        Tag::insert([
             'name' => strtoupper($faker->word),
             'created_at' => date_format($faker->dateTimeBetween($startDate = '-5 days', $endDate = 'now'),"Y-m-d"),
             'updated_at' => date_format($faker->dateTimeBetween($startDate = '-5 days', $endDate = 'now'),"Y-m-d"),

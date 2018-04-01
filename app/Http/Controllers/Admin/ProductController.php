@@ -42,27 +42,13 @@ class ProductController extends Controller {
     
     public function add(Request $request){
         
+       return view('admin.products.add',['product'=>new Product]);  
+    }
+    
+    
+    public function add_post(ProductRequest $request){
+        
        
-        
-        if ($request->isMethod('post')){
-          
-          
-          
-          $v = Validator::make($request->all(), [
-                  'tag.*' => 'required',
-                  'name' => 'required|max:100|min:4',
-                  'price' => 'required|numeric',
-                  'description' => 'required|max:1000|min:4',
-                  
-           ]);
-           
-         if ($v->fails())
-               {
-                   
-                   return redirect()->back()->withErrors($v->errors()); 
-                }
-        
-        
         $product=Product::create([
             'name'=>$request->input('name'),
             'price'=>$request->input('price'),
@@ -72,19 +58,14 @@ class ProductController extends Controller {
             
        if ($request->has('tag')) { 
           foreach($request->input('tag') as $tag){
-              
-           
-            $tag_model=Tag::firstOrCreate(['name'=>$tag]); 
-            DB::table('tp')->insert(['tag_id' => $tag_model->id, 'product_id' => $product->id]);
-            
-            
+              $tag_model=Tag::firstOrCreate(['name'=>$tag]); 
+              Tp::insert(['tag_id' => $tag_model->id, 'product_id' => $product->id]);
           }
-       }
-        
-       return redirect()->route('admin.products.index')->with('info','Item created successfully!');
+       
         }  
-       return view('admin.products.add',['product'=>new Product]);  
+       return redirect()->route('admin.products.index')->with('info','Item created successfully!');  
     }
+    
     
     
     
@@ -96,9 +77,6 @@ class ProductController extends Controller {
     
      public function edit_post($id,ProductRequest $request){
         
-       
-      
-          
           $model=Product::find($id);
           $model->update($request->except('_token'));
           $model->touch();
